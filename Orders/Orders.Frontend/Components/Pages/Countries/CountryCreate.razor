@@ -1,3 +1,7 @@
-﻿<h3>CountryCreate</h3>
-
-
+﻿<MudDialog>
+    <DialogContent>
+        <CountryForm Country="country" 
+                     OnValidSubmit="CreateAsync" 
+                     ReturnAction="Return" />
+    </DialogContent>
+</MudDialog>
