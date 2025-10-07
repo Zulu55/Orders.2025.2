@@ -24,6 +24,11 @@ public class StatesRepository : GenericRepository<State>, IStatesRepository
             .Where(x => x.Country!.Id == pagination.Id)
             .AsQueryable();
 
+        if (!string.IsNullOrWhiteSpace(pagination.Filter))
+        {
+            queryable = queryable.Where(x => x.Name.ToLower().Contains(pagination.Filter.ToLower()));
+        }
+
         return new ActionResponse<IEnumerable<State>>
         {
             WasSuccess = true,
@@ -39,6 +44,11 @@ public class StatesRepository : GenericRepository<State>, IStatesRepository
         var queryable = _context.States
             .Where(x => x.Country!.Id == pagination.Id)
             .AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(pagination.Filter))
+        {
+            queryable = queryable.Where(x => x.Name.ToLower().Contains(pagination.Filter.ToLower()));
+        }
 
         double count = await queryable.CountAsync();
         return new ActionResponse<int>
