@@ -29,6 +29,11 @@ public partial class CountriesIndex
         await LoadTotalRecordsAsync();
     }
 
+    private void StatesAction(Country country)
+    {
+        NavigationManager.NavigateTo($"/countries/details/{country.Id}");
+    }
+
     private async Task LoadTotalRecordsAsync()
     {
         loading = true;
