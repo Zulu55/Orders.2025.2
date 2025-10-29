@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using Orders.Frontend.Components.Shared;
@@ -7,6 +8,7 @@ using System.Net;
 
 namespace Orders.Frontend.Components.Pages.Categories;
 
+[Authorize(Roles = "Admin")]
 public partial class CategoriesIndex
 {
     private List<Category>? Categories { get; set; }
