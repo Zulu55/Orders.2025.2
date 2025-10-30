@@ -19,6 +19,13 @@ public class CategoriesController : GenericController<Category>
         _categoriesUnitOfWork = categoriesUnitOfWork;
     }
 
+    [AllowAnonymous]
+    [HttpGet("combo")]
+    public async Task<IActionResult> GetComboAsync()
+    {
+        return Ok(await _categoriesUnitOfWork.GetComboAsync());
+    }
+
     [HttpGet("paginated")]
     public override async Task<IActionResult> GetAsync([FromQuery] PaginationDTO pagination)
     {
