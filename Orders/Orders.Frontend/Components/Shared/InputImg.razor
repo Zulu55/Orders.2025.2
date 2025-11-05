@@ -1,0 +1,26 @@
+﻿<div>
+    <label>@Label</label>
+    <div>
+        <InputFile OnChange="OnChange" accept=".jpg,.jpeg,.png" />
+    </div>
+</div>
+
+<div>
+    @if (imageBase64 is not null)
+    {
+        <div>
+            <div style="margin: 10px">
+                <img src="data:image/jpeg;base64, @imageBase64" style="height:200px; max-width:200px" />
+            </div>
+        </div>
+    }
+
+    @if (ImageURL is not null)
+    {
+        <div>
+            <div style="margin: 10px">
+                <img src="@ImageURL" style="height:200px; max-width:200px" />
+            </div>
+        </div>
+    }
+</div>

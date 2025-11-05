@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Orders.Backend.Data;
+using Orders.Backend.Helpers;
 using Orders.Backend.Repositories.Implementations;
 using Orders.Backend.Repositories.Interfaces;
 using Orders.Backend.UnitsOfWork.Implementations;
@@ -52,6 +53,7 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddDbContext<DataContext>(x => x.UseSqlServer("name=LocalConnection"));
 builder.Services.AddTransient<SeedDb>();
+builder.Services.AddScoped<IFileStorage, FileStorage>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(x => x.TokenValidationParameters = new TokenValidationParameters
