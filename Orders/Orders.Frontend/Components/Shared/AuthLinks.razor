@@ -1,0 +1,35 @@
+﻿<AuthorizeView>
+    <Authorized>
+        <MudContainer Style="width: 18rem;">
+            @if (!string.IsNullOrEmpty(photoUser))
+            {
+                <MudContainer Class="d-flex justify-content-center mb-3">
+                    <MudBadge Color="Color.Success" Overlap="true" Bordered="true" Class="position-relative">
+                        <MudAvatar Size="Size.Large" Class="mb-3 mx-auto d-block">
+                            <MudImage Src="@photoUser"></MudImage>
+                        </MudAvatar>
+                    </MudBadge>
+                </MudContainer>
+            }
+            <MudText Typo="Typo.body1" Align="Align.Center">Hola! @context.User.Identity!.Name</MudText>
+            <MudPaper Elevation="1" Class="d-flex justify-content-center align-content-center">
+                <MudList T="object">
+                    <MudListItem>
+                        <MudButton Variant="Variant.Text" OnClick="EditAction">
+                            Editar Perfil <MudIcon Icon="@Icons.Material.Filled.Person" />
+                        </MudButton>
+                    </MudListItem>
+                    <MudListItem>
+                        <MudButton Variant="Variant.Text" OnClick="ShowModalLogOut">
+                            Cerrar Sesión <MudIcon Icon="@Icons.Material.Filled.Login" />
+                        </MudButton>
+                    </MudListItem>
+                </MudList>
+            </MudPaper>
+        </MudContainer>
+    </Authorized>
+    <NotAuthorized>
+        <MudMenuItem OnClick="ShowModalRegister">Registro Nuevo Usuario <MudIcon Icon="@Icons.Material.Filled.HowToReg" /> </MudMenuItem>
+        <MudMenuItem OnClick="ShowModalLogIn">Iniciar Sesion <MudIcon Icon="@Icons.Material.Filled.Login" /> </MudMenuItem>
+    </NotAuthorized>
+</AuthorizeView>
