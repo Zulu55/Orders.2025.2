@@ -1,3 +1,98 @@
-﻿<h3>Register</h3>
+﻿@page "/Register"
+@using Orders.Shared.Entities
 
-
+@if (loading)
+{
+    <Loading />
+}
+else
+{
+    <EditForm Model="userDTO"
+              OnValidSubmit="CreateUserAsync"
+              OnInvalidSubmit="InvalidForm"
+              FormName="RegisterForm">
+        <DataAnnotationsValidator />
+        <MudGrid>
+            <MudItem xs="12" sm="6">
+                <MudCardContent>
+                    <MudTextField Label="Nombre"
+                                  @bind-Value="userDTO.FirstName"
+                                  For="@(() => userDTO.FirstName)" />
+                    <MudTextField Label="Apellido"
+                                  @bind-Value="userDTO.LastName"
+                                  For="@(() => userDTO.LastName)" />
+                    <MudTextField Label="Documento"
+                                  @bind-Value="userDTO.Document"
+                                  For="@(() => userDTO.Document)" />
+                    <MudTextField Label="Telefono"
+                                  @bind-Value="userDTO.PhoneNumber"
+                                  For="@(() => userDTO.PhoneNumber)"
+                                  InputType="InputType.Telephone" />
+                    <MudTextField Label="Email"
+                                  @bind-Value="userDTO.Email"
+                                  For="@(() => userDTO.Email)"
+                                  InputType="InputType.Email" />
+                    <MudTextField Label="Dirección"
+                                  @bind-Value="userDTO.Address"
+                                  For="@(() => userDTO.Address)" />
+                    <MudTextField Label="Contraseña"
+                                  InputType="InputType.Password"
+                                  @bind-Value="userDTO.Password"
+                                  For="@(() => userDTO.Password)" />
+                    <MudTextField Label="Confirmar Contraseña"
+                                  InputType="InputType.Password"
+                                  @bind-Value="userDTO.PasswordConfirm"
+                                  For="@(() => userDTO.PasswordConfirm)" />
+                </MudCardContent>
+            </MudItem>
+            <MudItem xs="12" sm="6">
+                <MudCardContent>
+                    <MudAutocomplete T="Country"
+                                     Label="País"
+                                     Placeholder="--Seleccione un País--"
+                                     SearchFunc="SearchCountries"
+                                     Value="selectedCountry"
+                                     ValueChanged="CountryChangedAsync"
+                                     ToStringFunc="@(e=> e==null?null : $"{e.Name}")">
+                        <ItemTemplate Context="itemContext">
+                            @itemContext.Name
+                        </ItemTemplate>
+                    </MudAutocomplete>
+                    <MudAutocomplete T="State"
+                                     Label="Estado"
+                                     Placeholder="--Seleccione un Estado--"
+                                     SearchFunc="SearchStates"
+                                     Value="selectedState"
+                                     ValueChanged="StateChangedAsync"
+                                     ToStringFunc="@(e=> e==null?null : $"{e.Name}")">
+                        <ItemTemplate Context="itemContext">
+                            @itemContext.Name
+                        </ItemTemplate>
+                    </MudAutocomplete>
+                    <MudAutocomplete T="City"
+                                     Label="Ciudad"
+                                     Placeholder="--Seleccione una Ciudad--"
+                                     SearchFunc="SearchCity"
+                                     Value="selectedCity"
+                                     ValueChanged="CityChanged"
+                                     ToStringFunc="@(e=> e==null?null : $"{e.Name}")">
+                        <ItemTemplate Context="itemContext">
+                            @itemContext.Name
+                        </ItemTemplate>
+                    </MudAutocomplete>
+                </MudCardContent>
+                <MudItem xs="12" sm="6">
+                    <InputImg Label="Foto" ImageSelected="ImageSelected" ImageURL="@imageUrl" />
+                </MudItem>
+            </MudItem>
+            <MudItem xs="12" Class="d-flex justify-center mt-2">
+                <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.ArrowBack" Color="Color.Info" OnClick="ReturnAction" Class="ms-2 me-2 mb-2">
+                    Regresar
+                </MudButton>
+                <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Check" Color="Color.Primary" ButtonType="ButtonType.Submit" Class="mb-2">
+                    Guardar
+                </MudButton>
+            </MudItem>
+        </MudGrid>
+    </EditForm>
+}
